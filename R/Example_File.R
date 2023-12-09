@@ -1,3 +1,12 @@
+##pushing to git
+##git remote add origin git@github.com:mich625/HW_3.git   ##this probably not needed if connection already set
+##git branch -M main
+##git push -u origin main
+
+##R Oxygen2 code
+## ????
+##
+
 FL_local_summary = function(formula, data) {
   # Adjust the contrast settings to use one-hot encoding for factors
   options(contrasts = c("contr.sum", "contr.poly"))
@@ -63,6 +72,7 @@ noise1 = rnorm(100, 0, 1)  # some noise
 Purchase1 = 20000 + 500*age1 + 0.05*income1 + 10*age1*income1/100000 + noise1  # creating a relationship for Purchase
 
 data1 = data.frame(age = age1, income = income1, Purchase = Purchase1)
+rm(age1, income1, noise1, Purchase1)
 
 # Simulating dataset2 in a similar way
 age2 = rnorm(100, mean = 50, sd = 10)
@@ -71,6 +81,7 @@ noise2 = rnorm(100, 0, 1)
 Purchase2 = 20000 + 500*age2 + 0.05*income2 + 10*age2*income2/100000 + noise2
 
 data2 = data.frame(age = age2, income = income2, Purchase = Purchase2)
+rm(age2, income2, noise2, Purchase2)
 
 summary1 = FL_local_summary(Purchase ~ age + income +income:age, data1)
 summary2 = FL_local_summary(Purchase ~ age + income + income:age, data2)

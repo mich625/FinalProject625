@@ -1,3 +1,23 @@
+#'FL_Local_Summary
+#'
+#'This function will produce the local server federated learning summary statistics.  It requires an input of the
+#'linear regression formula and a csv data set.  It will then run a linear regression and poutput the beta coefficiants, standard error,
+#'t statistic, and p value (using a 2 sided test with alpha = 0.05 significance).
+#'
+#'
+#'@param formula linear regression formula being used for the study
+#'@param data csv file containing all the specified data fro the study.
+#'
+#'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value
+#'
+#'@examples
+#'data(mtcars)
+#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
+#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'
+#'@export
+#'
+
 FL_local_summary = function(formula, data) {
   # Adjust the contrast settings to use one-hot encoding for factors
   options(contrasts = c("contr.sum", "contr.poly"))
