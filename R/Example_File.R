@@ -6,6 +6,8 @@
 ##R Oxygen2 code
 ## ????
 ##
+## To create readme
+## roxygen2::roxygenize()
 
 FL_local_summary = function(formula, data) {
   # Adjust the contrast settings to use one-hot encoding for factors

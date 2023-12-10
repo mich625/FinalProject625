@@ -5,10 +5,9 @@
 #'will be exactly what the R Shiny app produces.
 #'
 #'
-#'@param formula linear regression formula being used for the study
-#'@param data csv file containing all the specified data fro the study.
+#'@param summaries the outputs from the FL_local_summary which contains all local level summary statistics that will be used in this analysis
 #'
-#'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value
+#'@return the combined list of summary statistics is returned
 #'
 #'@examples
 #'data(mtcars)

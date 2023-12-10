@@ -1,0 +1,44 @@
+---
+title: "625 Final Project README"
+author: "JA, MK, JT"
+date: "2023-12-10"
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# FinalProject625  
+
+
+
+# Description
+The goal of the package FinalProject625 is to run a federated learning analysis.  This is a way to generate a statistical summary while allowing for data privacy.  More specifically, separate servers can all send summary statistics up to a central server which can then compile the summary data mimicing a much larger analysis.  This package focuses on running a linear regression for  a health data set using insurance companies as the local servers. 
+
+
+## Installation
+
+You can install the development version of FinalProject625 from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("mich625/FinalProject625")
+```
+
+## Example
+
+(note) We can write this once we have our final functions. I loaded in the dataset so we should be able to use that
+
+```{r example}
+library(hw3mklinreg)
+mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
+```

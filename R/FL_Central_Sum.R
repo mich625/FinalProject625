@@ -1,3 +1,22 @@
+#'FL
+#'
+#'This function will take all the local server summaries and combine them in preparation for
+#'the federated learning analysis.  It requires all the local server summaries as an input, these
+#'will be exactly what the R Shiny app produces.
+#'
+#'
+#'@param summary this is the combined summary statistics output from the FL_combine function.
+#'
+#'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value for each covariate.
+#'
+#'@examples
+#'data(mtcars)
+#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
+#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'
+#'@export
+#'
+
 FL = function(summary) {
   # Get the estimates and standard errors of the coefficients
   beta_hat = solve(summary$xtx) %*% (summary$xty)

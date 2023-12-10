@@ -1,0 +1,79 @@
+---
+title: "Federated Learning Vignette"
+author: "JA, MK, JT"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+The goal of the package FinalProject625 is to run a federated learning analysis.  This is a way to generate a statistical summary while allowing for data privacy.  More specifically, separate servers can all send summary statistics up to a central server which can then compile the summary data mimicking a much larger analysis.  This package focuses on running a linear regression for  a health data set using insurance companies as the local servers.  This package contained 3 different functions described in detail below
+
+```{r setup}
+library(FinalProject625)
+```
+
+# Function FL_local_summary
+The first function is the FL_local_summary.  This function takes in a csv data set and a regression formula then produces local level summary statistics.  
+
+The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
+```{r}
+FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
+```
+
+
+# Function FL_local_summary
+The first function is the FL_local_summary.  This function takes in a csv data set and a regression formula then produces local level summary statistics.  
+
+The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
+```{r}
+FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
+```
+
+
+# Function FL_combine
+The second function is FL_combine.  This function takes the local level summary statistics (produced in FL_local_summary) and combines them.  This will be done at the central server level.
+
+The example below shows how summary stats from 2 different local servers (insurance companies) will be combined
+```{r}
+FL_combine(list(summary1, summary2))
+```
+
+
+# Function FL
+The final function, FL(), uses the output from FL_combine (the merged summary statistics) and condcts the federated learning analysis which is equivalent to the values an oracle server would have produced.
+
+The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
+```{r}
+FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
+```
+
+
+# Oracle Server Comparrison
+Once we have our function built I am thinking we can do an oracle server comparrison to out federated learning analysis here.
+
+
+
+
+# Benchmarking
+Not sure if we need this but I left my hw3 code below as a shell if we decide to use it
+
+```{r}
+bench::mark(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12], iterations = 1000 )
+```
+Benchmarking for simple linear regression is shown here too.
+
+```{r}
+bench::mark(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
+          round((summary(lm(formula = Ozone ~ Solar.R, data = airquality)))$coefficients,5)[1:8], iterations = 1000)
+```
