@@ -10,9 +10,11 @@
 #'@return the combined list of summary statistics is returned
 #'
 #'@examples
-#'data(mtcars)
-#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
-#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'data(Aetna)
+#'data(United.Sum)
+#'Aetna.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
+#`United.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, UnitedHealthcare)
+#'FL_combine(list(Aetna.Sum, United.Sum))
 #'
 #'@export
 #'

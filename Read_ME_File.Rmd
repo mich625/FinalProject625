@@ -36,9 +36,5 @@ devtools::install_github("mich625/FinalProject625")
 
 ## Example
 
-(note) We can write this once we have our final functions. I loaded in the dataset so we should be able to use that
+I think we skip this here or do something abbreviated since a effects b effects c the vignette example is much cleaner.
 
-```{r example}
-library(hw3mklinreg)
-mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
-```

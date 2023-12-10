@@ -28,25 +28,25 @@ The first function is the FL_local_summary.  This function takes in a csv data s
 
 The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
 ```{r}
-FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
-```
+Aetna.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
+United.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, UnitedHealthcare)
+Bluecross.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Blue.cross)
+Cigna.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Cigna)
+Medicare.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Medicare)
 
 
-# Function FL_local_summary
-The first function is the FL_local_summary.  This function takes in a csv data set and a regression formula then produces local level summary statistics.  
-
-The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
-```{r}
-FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
+##output below will be Aetna
+FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
 ```
 
 
 # Function FL_combine
 The second function is FL_combine.  This function takes the local level summary statistics (produced in FL_local_summary) and combines them.  This will be done at the central server level.
 
-The example below shows how summary stats from 2 different local servers (insurance companies) will be combined
+The example below shows how summary stats from the 5 different local servers (insurance companies) will be combined.
 ```{r}
-FL_combine(list(summary1, summary2))
+combine.sum = FL_combine(list(Aetna.Sum, United.Sum, Cigna.Sum, Medicare.Sum, Bluecross.Sum))
+combine.sum
 ```
 
 
@@ -55,13 +55,23 @@ The final function, FL(), uses the output from FL_combine (the merged summary st
 
 The example below shows how the local servers (individual insurance companies) can run the analysis and return only the summary statistics that need to be sent up to the central server.
 ```{r}
-FL_local_summary(Purchase ~ age + income +income:age, healthcare_dataset)
+FL(combine.sum)
 ```
 
 
 # Oracle Server Comparrison
-Once we have our function built I am thinking we can do an oracle server comparrison to out federated learning analysis here.
+The below example compared the output of the federated learning analysis with the output from the lm() regression function.  As shown below, all outputs match  
 
+```{r}
+oracle = lm(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, data = healthcare_dataset)
+oraclesum = summary(oracle)
+FL = FL(combine.sum)
+
+all.equal(unname(coef(oracle)),FL$Estimate)
+all.equal(unname(oraclesum$coefficients[, "Std. Error"]),FL$Std..Error)
+all.equal(unname(oraclesum$coefficients[, "t value"]),FL$t.value)
+all.equal(unname(oraclesum$coefficients[, "Pr(>|t|)"]),FL$p.value)
+```
 
 
 

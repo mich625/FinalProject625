@@ -10,9 +10,12 @@
 #'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value for each covariate.
 #'
 #'@examples
-#'data(mtcars)
-#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
-#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'data(Aetna)
+#'data(UnitedHealthcare)
+#'Aetna.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
+#`United.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, UnitedHealthcare)
+#'combine.sum = FL_combine(list(Aetna.Sum, United.Sum))
+#'FL(combine.sum)
 #'
 #'@export
 #'

@@ -62,7 +62,35 @@ FL = function(summary) {
   return(result)
 }
 
+##______________________________splitting the dataset_________________________
 
+full_data = healthcare_dataset
+full_data$length = full_data$Discharge.Date - full_data$Date.of.Admission
+
+UnitedHealthcare = subset(healthcare_dataset, Insurance.Provider == "UnitedHealthcare")
+Aetna = subset(healthcare_dataset, Insurance.Provider == "Aetna")
+Cigna = subset(healthcare_dataset, Insurance.Provider == "Cigna")
+Medicare = subset(healthcare_dataset, Insurance.Provider == "Medicare")
+Blue.cross = subset(healthcare_dataset, Insurance.Provider == "Blue Cross")
+
+write.csv(UnitedHealthcare, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/UnitedHealthcare.csv", row.names = FALSE)
+write.csv(Aetna, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/Aetna.csv", row.names = FALSE)
+write.csv(Cigna, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/Cigna.csv", row.names = FALSE)
+write.csv(Blue.cross, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/Blue.cross.csv", row.names = FALSE)
+write.csv(Medicare, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/Medicare.csv", row.names = FALSE)
+
+
+##formula = Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication + Length
+
+
+##MK - example using our dataset____________________________
+
+Aetna.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
+United.Sum = FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, UnitedHealthcare)
+
+combine.sum = FL_combine(list(Aetna.Sum, United.Sum))
+
+FL(combine.sum)
 
 ####------- Example
 set.seed(42)  # For reproducibility
