@@ -1,2 +1,2 @@
 # FinalProject625
-Final project for 625 class - Federated Learning
+The goal of this package is to provide functions to implement federated learning.
