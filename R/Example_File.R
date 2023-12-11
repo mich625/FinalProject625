@@ -65,13 +65,13 @@ FL = function(summary) {
 ##______________________________splitting the dataset_________________________
 
 full_data = healthcare_dataset
-full_data$length = full_data$Discharge.Date - full_data$Date.of.Admission
+full_data$length.of.stay = full_data$`Discharge Date` - full_data$`Date of Admission` + 1
 
-UnitedHealthcare = subset(healthcare_dataset, Insurance.Provider == "UnitedHealthcare")
-Aetna = subset(healthcare_dataset, Insurance.Provider == "Aetna")
-Cigna = subset(healthcare_dataset, Insurance.Provider == "Cigna")
-Medicare = subset(healthcare_dataset, Insurance.Provider == "Medicare")
-Blue.cross = subset(healthcare_dataset, Insurance.Provider == "Blue Cross")
+UnitedHealthcare = subset(full_data, `Insurance Provider` == "UnitedHealthcare")
+Aetna = subset(full_data, `Insurance Provider` == "Aetna")
+Cigna = subset(full_data, `Insurance Provider` == "Cigna")
+Medicare = subset(full_data, `Insurance Provider` == "Medicare")
+Blue.cross = subset(full_data, `Insurance Provider` == "Blue Cross")
 
 write.csv(UnitedHealthcare, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/UnitedHealthcare.csv", row.names = FALSE)
 write.csv(Aetna, file = "C:/Users/Michael/Dropbox (University of Michigan)/Biostat - Semester 3/BIOSTAT 625/FinalProject625/data/Aetna.csv", row.names = FALSE)
