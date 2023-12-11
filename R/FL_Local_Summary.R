@@ -11,9 +11,9 @@
 #'@return a list containing the summary statistics (XtX matrix, XtY matrix, YtY matrix, & n) is returned
 #'
 #'@examples
-#'data(mtcars)
-#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
-#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'data(Aetna)
+#'FL_local_summary(Billing.Amount ~ Age + Gender + Medical.Condition + Admission.Type + Medication, Aetna)
+#'
 #'
 #'@export
 #'
